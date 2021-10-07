@@ -1,11 +1,9 @@
 package internal
 
-type Categories struct {
-	Category []string `json:"category"`
-}
+type Categories []string
 
 type Joke struct {
-	Categories []string `json:"categories"`
+	Categories Categories `json:"categories"`
 	CreatedAt  string   `json:"created_at"`
 	IconUrl    string   `json:"icon_url"`
 	Id         string   `json:"id"`
