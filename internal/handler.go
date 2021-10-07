@@ -1,7 +1,18 @@
 package internal
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
+// @title User-comment API
+// @version 0.1
+// @description API Server for users and their comments
+// @host localhost:80
+// @BasePath /
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func RandomJoke() {
 	joke, err := GetRandom()
 	if err != nil {
@@ -15,14 +26,21 @@ func Dump(count int) {
 	if err != nil {
 		fmt.Println("error:", err.Error())
 	}
+
+	var wg sync.WaitGroup
 	for _, category := range categories {
-		jokes, err := getJokesByCategory(category, count)
-		if err != nil {
-			fmt.Println("error:", err.Error())
-			break
-		}
-		SaveToFile(jokes, category)
+		wg.Add(1)
+		go func(category string) {
+			defer wg.Done()
+			jokes, err := getJokesByCategory(category, count)
+			if err != nil {
+				fmt.Println("error:", err.Error())
+			}
+			SaveToFile(jokes, category)
+		}(category)
 	}
+	wg.Wait()
+
 	fmt.Printf("%d files created - %d categories, with %d jokes in each of the categories\n",
 		len(categories), len(categories), count)
 }
