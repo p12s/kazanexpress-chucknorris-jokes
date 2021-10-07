@@ -25,11 +25,15 @@ func appendToFile(jokes []Joke, fileName string) {
 	if err != nil {
 		fmt.Println("Append to file error:", err.Error())
 	}
-	defer f.Close()
 
 	for _, joke := range jokes {
 		if _, err := f.WriteString(joke.Value + "\n"); err != nil {
 			fmt.Println("Append to file error:", err.Error())
 		}
+	}
+
+	closeErr := f.Close()
+	if closeErr != nil {
+		fmt.Println("Close file error:", closeErr.Error())
 	}
 }

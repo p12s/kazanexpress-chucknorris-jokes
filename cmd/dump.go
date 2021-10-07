@@ -16,7 +16,7 @@ var (
 for each of the existing categories and save them to text files - 
 one for each of the categories.`,
 		Run: func(cmd *cobra.Command, args []string) {
-			number, _ := cmd.Flags().GetInt("number")
+			number, _ = cmd.Flags().GetInt("number")
 			internal.Dump(number)
 		},
 	}
