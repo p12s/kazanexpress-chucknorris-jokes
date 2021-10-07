@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// randomCmd @title "random" command
 var randomCmd = &cobra.Command{
 	Use:   "random",
 	Short: "Getting a random joke",

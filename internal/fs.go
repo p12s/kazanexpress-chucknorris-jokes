@@ -5,11 +5,13 @@ import (
 	"os"
 )
 
+// SaveToFile @title Save one category jokes to file
 func SaveToFile(jokes []Joke, categoryName string) {
 	clearFileIfExists(categoryName)
 	appendToFile(jokes, categoryName)
 }
 
+// clearFileIfExists @title Remove file if exists
 func clearFileIfExists(fileName string) {
 	err := os.RemoveAll(fileName + ".txt")
 	if err != nil {
@@ -17,8 +19,9 @@ func clearFileIfExists(fileName string) {
 	}
 }
 
+// appendToFile @title Append joke to file
 func appendToFile(jokes []Joke, fileName string) {
-	f, err := os.OpenFile(fileName + ".txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(fileName+".txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println("Append to file error:", err.Error())
 	}

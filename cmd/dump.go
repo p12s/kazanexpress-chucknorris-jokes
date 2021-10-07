@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// randomCmd @title "dump" command with flag
 var (
 	number int
 

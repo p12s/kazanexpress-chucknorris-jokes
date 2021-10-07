@@ -5,14 +5,7 @@ import (
 	"sync"
 )
 
-// @title User-comment API
-// @version 0.1
-// @description API Server for users and their comments
-// @host localhost:80
-// @BasePath /
-// @securityDefinitions.apikey ApiKeyAuth
-// @in header
-// @name Authorization
+// RandomJoke @title Getting random joke
 func RandomJoke() {
 	joke, err := GetRandom()
 	if err != nil {
@@ -21,6 +14,7 @@ func RandomJoke() {
 	fmt.Println(joke.Value)
 }
 
+// Dump @title Getting bulk of jokes by each category
 func Dump(count int) {
 	categories, err := GetCategories()
 	if err != nil {
@@ -45,6 +39,7 @@ func Dump(count int) {
 		len(categories), len(categories), count)
 }
 
+// getJokesByCategory @title Getting N jokes by category
 func getJokesByCategory(category string, count int) ([]Joke, error) {
 	var jokeList []Joke
 	for i := 0; i < count; i++ {
@@ -57,10 +52,12 @@ func getJokesByCategory(category string, count int) ([]Joke, error) {
 	return jokeList, nil
 }
 
+// getByCategory @title Getting one joke by category
 func getByCategory(category string) (Joke, error) {
 	return GetByCategory(category)
 }
 
+// Clear @title Clear all joke-saved files
 func Clear() {
 	categories, err := GetCategories()
 	if err != nil {
